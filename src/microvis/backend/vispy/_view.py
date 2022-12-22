@@ -38,7 +38,7 @@ class View(Node, core.view.ViewBackend):
         self._native = scene.ViewBox(**backend_kwargs)
 
         # TODO: it would be nice if the responsibility of recursing through
-        # the view tree was handled by the FrontEndFor logic...
+        # the view tree was handled by the VisModel logic...
         self._viz_set_scene(view.scene)
         self._viz_set_camera(view.camera)
 

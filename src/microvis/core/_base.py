@@ -12,7 +12,7 @@ from pydantic.fields import Field, PrivateAttr
 
 from microvis._logger import logger
 
-__all__ = ["Field", "FrontEndFor", "ModelBase", "SupportsVisibility"]
+__all__ = ["Field", "VisModel", "ModelBase", "SupportsVisibility"]
 
 SETTER_METHOD = "_viz_set_{name}"
 
@@ -27,7 +27,7 @@ class ModelBase(EventedModel):
         json_encoders = {EventedList: lambda x: list(x), np.ndarray: np.ndarray.tolist}
 
 
-F = TypeVar("F", covariant=True, bound="FrontEndFor")
+F = TypeVar("F", covariant=True, bound="VisModel")
 
 
 class BackendAdaptor(Protocol[F]):
@@ -56,7 +56,7 @@ class SupportsVisibility(BackendAdaptor[F], Protocol):
 T = TypeVar("T", bound=BackendAdaptor)
 
 
-class FrontEndFor(ModelBase, Generic[T]):
+class VisModel(ModelBase, Generic[T]):
     """Front end object driving a backend interface.
 
     This is an important class.  Most things subclass this.  It provides the event
@@ -151,7 +151,7 @@ class FrontEndFor(ModelBase, Generic[T]):
 
 
 @lru_cache
-def validate_backend_class(cls: type[FrontEndFor], backend_class: type[T]) -> type[T]:
+def validate_backend_class(cls: type[VisModel], backend_class: type[T]) -> type[T]:
     """Validate that the backend class is appropriate for the object."""
     logger.debug(f"Validating backend class {backend_class} for {cls}")
     if missing := {

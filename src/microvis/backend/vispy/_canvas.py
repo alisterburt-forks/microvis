@@ -28,7 +28,7 @@ class Canvas(core.canvas.CanvasBackend):
         )
 
         # TODO: it would be nice if the responsibility of recursing through
-        # the view tree was handled by the FrontEndFor logic...
+        # the view tree was handled by the VisModel logic...
         for view in canvas.views:
             if not view.has_backend:
                 view._backend = View(view)

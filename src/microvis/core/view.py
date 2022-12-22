@@ -17,7 +17,7 @@ from pydantic import validator
 
 from microvis._types import ArrayLike, Color
 
-from ._base import Field, FrontEndFor
+from ._base import Field, VisModel
 from .nodes import Camera, Image, Scene
 from .nodes.node import Node, NodeBackend
 
@@ -124,7 +124,7 @@ class Dimensions(EventedModel):
 #     slices: List[Slice] = []
 
 
-class View(Node, FrontEndFor[ViewBackend]):
+class View(Node, VisModel[ViewBackend]):
     """A rectangular area on a canvas that displays a scene, with a camera.
 
     A canvas can have one or more views. Each view has a single scene (i.e. a
