@@ -95,3 +95,6 @@ ColorName = Literal[
 # None means black and transparent
 # str to allow "#FFF" hex strings ... but kinda makes the list above useless.
 ValidColor = Union[None, ColorName, str, list, tuple, np.ndarray]
+
+Matrix3x3 = np.ndarray
+Matrix4x4 = np.ndarray

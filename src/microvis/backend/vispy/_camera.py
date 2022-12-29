@@ -33,7 +33,7 @@ class Camera(Node, camera.CameraAdaptorProtocol):
             corner = np.subtract(self._vispy_node.center[:2], scale / 2)
             self._vispy_node.rect = tuple(corner) + tuple(scale)
 
-    def _vis_set_center(self, arg: tuple[float, ...]) -> None:
+    def _vis_set_position(self, arg: tuple[float, ...]) -> None:
         self._vispy_node.center = arg[::-1]  # TODO
         self._vispy_node.view_changed()
 
